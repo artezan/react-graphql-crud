@@ -56,7 +56,7 @@ class App extends Component  {
                       
                           <td>
                             <div>
-                              <img src={book.isbn} />
+                              <img src={book.isbn} alt="" />
                             </div>
                           </td>
                           <td>

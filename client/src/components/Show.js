@@ -45,7 +45,7 @@ class Show extends Component {
             <div className="container">
               { console.log(data)}
               <div>
-              <img src={data.book.isbn} />
+              <img src={data.book.isbn} alt="" />
               </div>
               <div className="panel panel-default">
                 <div className="panel-heading">
