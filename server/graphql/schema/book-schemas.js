@@ -8,7 +8,7 @@ var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInputObjectType = require('graphql').GraphQLInputObjectType;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
-var BookModel = require('../models/book');
+var BookModel = require('../../models/book');
 var PubSub = require('graphql-subscriptions').PubSub;
 
 const pubsub = new PubSub(); //create a PubSub instance

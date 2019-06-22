@@ -7,7 +7,7 @@ import { Query, Mutation } from "react-apollo";
 // queries
 const GET_BOOK = gql`
   query book($bookId: String) {
-    book(id: $bookId) {
+    book(_id: $bookId) {
       _id
       isbn
       title
@@ -22,7 +22,7 @@ const GET_BOOK = gql`
 
 const DELETE_BOOK = gql`
   mutation removeBook($id: String!) {
-    removeBook(id: $id) {
+    removeBook(_id: $id) {
       _id
     }
   }

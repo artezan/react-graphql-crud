@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import gql from "graphql-tag";
-import { Query, Mutation } from "react-apollo";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import { Query, Mutation } from 'react-apollo';
 
 const GET_BOOK = gql`
   query book($bookId: String) {
-    book(id: $bookId) {
+    book(_id: $bookId) {
       _id
       isbn
       title
@@ -20,22 +20,24 @@ const GET_BOOK = gql`
 
 const UPDATE_BOOK = gql`
   mutation updateBook(
-    $id: String!
+    $_id: String!
     $isbn: String!
     $title: String!
     $author: String!
     $description: String!
     $publisher: String!
-    $published_year: Int!
+    $published_year: Float!
   ) {
     updateBook(
-      id: $id
-      isbn: $isbn
-      title: $title
-      author: $author
-      description: $description
-      publisher: $publisher
-      published_year: $published_year
+      input: {
+        _id: $_id
+        isbn: $isbn
+        title: $title
+        author: $author
+        description: $description
+        publisher: $publisher
+        published_year: $published_year
+      }
     ) {
       updated_date
     }
@@ -51,14 +53,19 @@ class Edit extends Component {
         variables={{ bookId: this.props.match.params.id }}
       >
         {({ loading, error, data }) => {
-          if (loading) return "Loading...";
+          if (loading) return 'Loading...';
           if (error) return `Error! ${error.message}`;
 
           return (
             <Mutation
               mutation={UPDATE_BOOK}
               key={data.book._id}
-              onCompleted={() => this.props.history.push(`/`)}
+              onCompleted={() =>
+                this.props.history.push({
+                  state: 'flushDeal',
+                  pathname: '/'
+                })
+              }
             >
               {(updateBook, { loading, error }) => (
                 <div className="container">
@@ -77,7 +84,7 @@ class Edit extends Component {
                           e.preventDefault();
                           updateBook({
                             variables: {
-                              id: data.book._id,
+                              _id: data.book._id,
                               isbn: isbn.value,
                               title: title.value,
                               author: author.value,
@@ -86,12 +93,12 @@ class Edit extends Component {
                               published_year: parseInt(published_year.value)
                             }
                           });
-                          isbn.value = "";
-                          title.value = "";
-                          author.value = "";
-                          description.value = "";
+                          isbn.value = '';
+                          title.value = '';
+                          author.value = '';
+                          description.value = '';
                           publisher.value = null;
-                          published_year.value = "";
+                          published_year.value = '';
                         }}
                       >
                         <div className="form-group">

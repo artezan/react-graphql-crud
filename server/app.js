@@ -10,7 +10,7 @@ var usersRouter = require("./routes/users");
 var mongoose = require("mongoose");
 // graphQL
 var graphqlHTTP = require("express-graphql");
-var schema = require("./graphql/book-schemas");
+var schema = require("./graphql/schema/book-schemas");
 var cors = require("cors");
 var app = express();
 
